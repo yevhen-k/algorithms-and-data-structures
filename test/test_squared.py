@@ -1,6 +1,6 @@
 from sorting.squared import bubble_sort, insertion_sort, choise_sort
 from sorting.linear import count_sort
-from sorting.n_log_n import quicksort, _merge, mergesort
+from sorting.n_log_n import quicksort, _merge, mergesort, timsort
 import unittest
 
 
@@ -8,42 +8,51 @@ class TestSorting(unittest.TestCase):
 
     def test_bubble_sort(self):
         A = list(range(10, -1, -1))
-        res = bubble_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        bubble_sort(A)
+        self.assertEqual(sorted(B), A)
 
         A = [0] * 10
-        res = bubble_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        bubble_sort(A)
+        self.assertEqual(sorted(B), A)
 
         A = list(range(10, 20)) + list(range(10))
-        res = bubble_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        bubble_sort(A)
+        self.assertEqual(sorted(B), A)
 
     def test_insertion_sort(self):
         A = list(range(10, -1, -1))
-        res = insertion_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        insertion_sort(A)
+        self.assertEqual(sorted(B), A)
 
         A = [0] * 10
-        res = insertion_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        insertion_sort(A)
+        self.assertEqual(sorted(B), A)
 
         A = list(range(10, 20)) + list(range(10))
-        res = insertion_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        insertion_sort(A)
+        self.assertEqual(sorted(B), A)
 
     def test_choise_sort(self):
         A = list(range(10, -1, -1))
-        res = choise_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        choise_sort(A)
+        self.assertEqual(sorted(B), A)
 
         A = [0] * 10
-        res = choise_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        choise_sort(A)
+        self.assertEqual(sorted(B), A)
 
         A = list(range(10, 20)) + list(range(10))
-        res = choise_sort(A)
-        self.assertEqual(sorted(A), res)
+        B = list(A)
+        choise_sort(A)
+        self.assertEqual(sorted(B), A)
 
     def test_count_sort(self):
         A = list(range(10, -1, -1))
