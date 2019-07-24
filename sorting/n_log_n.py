@@ -122,6 +122,9 @@ def _merge_timsort(L: list, start: int, mid: int, end: int) -> None:
 
 
 def heapsort(L: list) -> None:
+    """
+    heapsort algorithm for list of numbers
+    """
     last_elem_idx = len(L)
     _heapify(L, last_elem_idx)
     for i in range(last_elem_idx - 1, 0, -1):
