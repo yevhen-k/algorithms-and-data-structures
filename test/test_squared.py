@@ -2,6 +2,7 @@ from sorting.squared import bubble_sort, insertion_sort, choise_sort
 from sorting.linear import count_sort
 from sorting.n_log_n import quicksort, _merge, mergesort
 from sorting.n_log_n import timsort, _merge_timsort, _insertion_sort_partitioned
+from sorting.n_log_n import heapsort
 import unittest
 
 
@@ -137,6 +138,22 @@ class TestSorting(unittest.TestCase):
         A = list(range(10, 20)) + list(range(10))
         B = list(A)
         timsort(B)
+        self.assertEqual(sorted(A), B)
+
+    def test_heapsort(self):
+        A = list(range(10, -1, -1))
+        B = list(A)
+        heapsort(B)
+        self.assertEqual(sorted(A), B)
+
+        A = [0] * 10
+        B = list(A)
+        heapsort(B)
+        self.assertEqual(sorted(A), B)
+
+        A = list(range(10, 20)) + list(range(10))
+        B = list(A)
+        heapsort(B)
         self.assertEqual(sorted(A), B)
 
 

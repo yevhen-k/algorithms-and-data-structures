@@ -119,3 +119,24 @@ def _merge_timsort(L: list, start: int, mid: int, end: int) -> None:
         L[k] = r[j]
         k += 1
         j += 1
+
+
+def heapsort(L: list) -> None:
+    last_elem_idx = len(L)
+    _heapify(L, last_elem_idx)
+    for i in range(last_elem_idx - 1, 0, -1):
+        L[0], L[i] = L[i], L[0]
+        _heapify(L, i)
+
+def _heapify(L: list, root: int) -> None:
+    for i in range(root):
+        largest = i
+        left_leaf = 2*i + 1
+        right_leaf = 2*i + 2
+        if left_leaf < root and L[left_leaf] > L[largest]:
+            largest = left_leaf
+        if right_leaf < root and L[right_leaf] > L[largest]:
+            largest = right_leaf
+        if largest != i:
+            L[i], L[largest] = L[largest], L[i]
+            _heapify(L, largest)
