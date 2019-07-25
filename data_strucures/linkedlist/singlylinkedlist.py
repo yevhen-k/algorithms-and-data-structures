@@ -98,7 +98,7 @@ class SinglyLinkedList:
         res = res.replace(', ]', ']')
         return res
 
-    def __eq__(self, value) -> bool:
+    def __eq__(self, value: SinglyLinkedList) -> bool:
         if type(value) != type(self):
             return False
         if len(value) != len(self):
@@ -112,5 +112,5 @@ class SinglyLinkedList:
             cur_node = cur_node.next
         return True
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self._size        
