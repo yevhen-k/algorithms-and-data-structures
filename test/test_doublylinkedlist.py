@@ -66,10 +66,49 @@ class TestDoublyLinkedList(unittest.TestCase):
         dl.insert_before(dl.head, 1)
         self.assertEqual(n, len(dl))
 
-        self.assertEqual(DoublyLinkedList(), 0)
+        self.assertEqual(len(DoublyLinkedList()), 0)
 
+    @staticmethod
+    def generate_data_for_remove(length: int, remove: int) -> (DoublyLinkedList, DoublyLinkedList, int):
+        dl1 = DoublyLinkedList()
+        dl2 = DoublyLinkedList()
+        removed = 0
+        for i in range(length):
+            if i == remove:
+                dl2.append(i)
+                removed = i
+                continue
+            dl1.append(i)
+            dl2.append(i)
+        return dl1, dl2, removed
 
+    def test_remove_where(self):
+        length = 10
+        remove = 0
+        dl1, dl2, removed_val = self.generate_data_for_remove(length, remove)
+        self.assertEqual(dl1, dl2.remove_where(removed_val))
 
+        remove = 5
+        dl1, dl2, removed_val = self.generate_data_for_remove(length, remove)
+        self.assertEqual(dl1, dl2.remove_where(removed_val))
+
+        remove = 9
+        dl1, dl2, removed_val = self.generate_data_for_remove(length, remove)
+        self.assertEqual(dl1, dl2.remove_where(removed_val))
+
+    def test_remove_by_position(self):
+        length = 10
+        remove = 0
+        dl1, dl2, removed_idx = self.generate_data_for_remove(length, remove)
+        self.assertEqual(dl1, dl2.remove_by_position(removed_idx))
+
+        remove = 5
+        dl1, dl2, removed_idx = self.generate_data_for_remove(length, remove)
+        self.assertEqual(dl1, dl2.remove_by_position(removed_idx))
+
+        remove = 9
+        dl1, dl2, removed_idx = self.generate_data_for_remove(length, remove)
+        self.assertEqual(dl1, dl2.remove_by_position(removed_idx))
 
 
 if __name__ == "__main__":

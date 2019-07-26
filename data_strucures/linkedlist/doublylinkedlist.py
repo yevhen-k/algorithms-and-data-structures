@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 class Node:
 
     def __init__(self, data):
@@ -61,7 +62,7 @@ class DoublyLinkedList:
     def remove_by_position(self, pos: int) -> DoublyLinkedList:
         cur_pos = 0
         prev_node = self.head
-        if prev_node == None:
+        if not prev_node:
             return self
         if pos == 0:
             self.head = prev_node.next
@@ -83,16 +84,27 @@ class DoublyLinkedList:
         cur_node = self.head
         while cur_node:
             if cur_node.data == data:
+                # if node in the middle of linkedlist
                 if cur_node.next and cur_node.prev:
-                    cur_node.prev = cur_node.next
+                    cur_node.prev.next = cur_node.next
+                    cur_node.next.prev = cur_node.prev
                     self._size -= 1
                     return self
+                # if node on the start of the linkedlist
                 if cur_node.next and not cur_node.prev:
+                    self.head = cur_node.next
                     cur_node.next.prev = None
                     self._size -= 1
                     return self
+                # if linkedlist has only single node
+                if not cur_node.next and not cur_node.prev:
+                    self.head = None
+                    self._size -= 1
+                    return self
+                # if node on the end of linkedlist
                 if not cur_node.next and cur_node.prev:
                     cur_node.prev.next = None
+                    cur_node.prev = None
                     self._size -= 1
                     return self
             cur_node = cur_node.next
@@ -128,13 +140,3 @@ class DoublyLinkedList:
 
     def __len__(self) -> int:
         return self._size
-
-
-
-if __name__ == "__main__":
-    dl = DoublyLinkedList()
-    dl.prepend(1).prepend(2).prepend(3).prepend(4).prepend(5)
-    print(dl)
-    remove = 2 # 2 3 4 5 
-    print(dl.remove_where(remove), len(dl))
-
