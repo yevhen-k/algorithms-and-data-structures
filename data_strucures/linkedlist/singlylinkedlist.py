@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 class Node:
 
     def __init__(self, data):
@@ -22,7 +23,7 @@ class SinglyLinkedList:
 
     def append(self, data) -> SinglyLinkedList:
         node = Node(data)
-        if self.head != None:
+        if self.head:
             current_node = self.head
             while current_node.next:
                 current_node = current_node.next
@@ -56,7 +57,7 @@ class SinglyLinkedList:
     def remove_by_position(self, pos: int) -> SinglyLinkedList:
         cur_pos = 0
         prev_node = self.head
-        if prev_node == None:
+        if not prev_node:
             return self
         if pos == 0:
             self.head = prev_node.next
@@ -73,7 +74,6 @@ class SinglyLinkedList:
             prev_node = prev_node.next
             cur_node = cur_node.next
         return self
-        
 
     def insert_after(self, prev_node: Node, data) -> SinglyLinkedList:
         if prev_node is None:
