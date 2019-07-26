@@ -13,13 +13,15 @@ class DoublyLinkedList:
 
     def __init__(self):
         self.head = None
+        self.tail = None
         self._size = 0
 
     def prepend(self, data) -> DoublyLinkedList:
         node = Node(data)
         if not self.head:
             self.head = node
-            self._size +=1
+            self.tail = node
+            self._size += 1
             return self
         self.head.prev = node
         node.next = self.head
@@ -29,18 +31,16 @@ class DoublyLinkedList:
 
     def append(self, data) -> DoublyLinkedList:
         node = Node(data)
-        curr_node = self.head
-        if curr_node:
-            while curr_node.next:
-                curr_node = curr_node.next
-            curr_node.next = node
-            node.prev = curr_node
-            self._size += 1
-            return self
-        else:
+        if not self.tail:
+            self.tail = node
             self.head = node
             self._size += 1
             return self
+        self.tail.next = node
+        node.prev = self.tail
+        self.tail = node
+        self._size += 1
+        return self
 
     def insert_after(self, prev_node: Node, data) -> DoublyLinkedList:
         if not prev_node or not prev_node.next:
@@ -112,7 +112,7 @@ class DoublyLinkedList:
 
     def __str__(self) -> str:
         res = '['
-        if not self.head:
+        if not self.head and not self.tail:
             res += ']'
             return res
         node = self.head
