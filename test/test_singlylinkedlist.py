@@ -1,6 +1,7 @@
 import unittest
 from data_strucures.linkedlist.singlylinkedlist import SinglyLinkedList
 
+
 class TestSinglyLinkedList(unittest.TestCase):
 
     def test_equality(self):
@@ -19,7 +20,8 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertNotEqual(ll1, ll3)
         self.assertNotEqual(ll1, fake_ll)
 
-    def generate_date_to_test_remove(self, remove_idx, length):
+    @staticmethod
+    def generate_date_to_test_remove(remove_idx, length):
         ll1 = SinglyLinkedList()
         ll2 = SinglyLinkedList()
         removed_key = 0
@@ -72,7 +74,6 @@ class TestSinglyLinkedList(unittest.TestCase):
         for i in range(1, 11):
             ll1.prepend(i)
             self.assertEqual(i, len(ll1))
-
 
 
 if __name__ == "__main__":
