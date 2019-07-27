@@ -1,5 +1,5 @@
 import unittest
-from data_strucures.array.dynamicarray import DynamicArray
+from data_structures.array.dynamicarray import DynamicArray
 
 
 class TestDynamicArray(unittest.TestCase):
