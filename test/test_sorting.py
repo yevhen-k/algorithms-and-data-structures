@@ -1,4 +1,4 @@
-from sorting.squared import bubble_sort, insertion_sort, choise_sort
+from sorting.squared import bubble_sort, insertion_sort, choice_sort
 from sorting.linear import count_sort
 from sorting.n_log_n import quicksort, _merge, mergesort
 from sorting.n_log_n import timsort, _merge_timsort, _insertion_sort_partitioned
@@ -43,17 +43,17 @@ class TestSorting(unittest.TestCase):
     def test_choise_sort(self):
         A = list(range(10, -1, -1))
         B = list(A)
-        choise_sort(A)
+        choice_sort(A)
         self.assertEqual(sorted(B), A)
 
         A = [0] * 10
         B = list(A)
-        choise_sort(A)
+        choice_sort(A)
         self.assertEqual(sorted(B), A)
 
         A = list(range(10, 20)) + list(range(10))
         B = list(A)
-        choise_sort(A)
+        choice_sort(A)
         self.assertEqual(sorted(B), A)
 
     def test_count_sort(self):

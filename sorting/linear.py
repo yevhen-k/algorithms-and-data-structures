@@ -1,10 +1,10 @@
-def count_sort(L: list) -> list:
+def count_sort(lst: list) -> list:
     """
     count sort for list of integer numbers
     """
     freq = {}
-    minval, maxval = L[0], L[0]
-    for i in L:
+    minval, maxval = lst[0], lst[0]
+    for i in lst:
         freq[i] = freq.get(i, 0) + 1
         if i < minval:
             minval = i

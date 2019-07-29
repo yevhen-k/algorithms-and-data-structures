@@ -1,33 +1,33 @@
-def bubble_sort(L: list) -> None:
+def bubble_sort(lst: list) -> None:
     """
     bubble sort for list of numbres
     """
-    n = len(L)
+    n = len(lst)
     for i in range(n):
         for j in range(n - (i + 1)):
-            if L[j] > L [j + 1]:
-                L[j], L [j + 1] = L[j + 1], L[j]
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
 
 
-def insertion_sort(L: list) -> None:
+def insertion_sort(lst: list) -> None:
     """
     insertion sort for lists of numbers
     """
-    n = len(L)
+    n = len(lst)
     for top in range(1, n):
         k = top
         while k > 0:
-            if L[k] < L[k - 1]:
-                L[k], L[k - 1] = L[k - 1], L[k]
+            if lst[k] < lst[k - 1]:
+                lst[k], lst[k - 1] = lst[k - 1], lst[k]
             k -= 1
 
 
-def choise_sort(L: list) -> None:
+def choice_sort(lst: list) -> None:
     """
-    choise sort for list of numbers
+    choice sort for list of numbers
     """
-    n = len(L)
+    n = len(lst)
     for i in range(0, n):
         for j in range(i + 1, n):
-            if L[i] > L[j]:
-                L[i], L[j] = L[j], L[i]
+            if lst[i] > lst[j]:
+                lst[i], lst[j] = lst[j], lst[i]
