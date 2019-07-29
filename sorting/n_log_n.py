@@ -1,104 +1,103 @@
 TIMSORT_PARTITION_SIZE = 32
 
 
-def quicksort(L: list) -> list:
+def quicksort(lst: list) -> list:
     """
     quick sort for list of numbers
     """
-    copy = list(L)
+    copy = list(lst)
     low = 0
     high = len(copy) - 1
     _quicksort(copy, low, high)
     return copy
 
 
-def _quicksort(L: list, low: int, high: int) -> None:
+def _quicksort(lst: list, low: int, high: int) -> None:
     if low < high:
-        partition = _partition(L, low, high)
-        _quicksort(L, low, partition - 1)
-        _quicksort(L, partition + 1, high)
+        partition = _partition(lst, low, high)
+        _quicksort(lst, low, partition - 1)
+        _quicksort(lst, partition + 1, high)
 
 
-def _partition(L: list, low: int, high: int) -> int:
-    pivot = L[high]
+def _partition(lst: list, low: int, high: int) -> int:
+    pivot = lst[high]
     min_idx = low - 1
     for j in range(low, high):
-        if L[j] <= pivot:
+        if lst[j] <= pivot:
             min_idx += 1
-            L[min_idx], L[j] = L[j], L[min_idx]
-    L[min_idx + 1], L[high] = L[high], L[min_idx + 1]
+            lst[min_idx], lst[j] = lst[j], lst[min_idx]
+    lst[min_idx + 1], lst[high] = lst[high], lst[min_idx + 1]
     return min_idx + 1
 
 
-def mergesort(L: list) -> list:
+def mergesort(lst: list) -> list:
     """
     merge sort for list of numbers
     """
-    if len(L) > 1:
-        mid = int( len(L) / 2)
-        l = mergesort(L[:mid])
-        r = mergesort(L[mid:])
+    if len(lst) > 1:
+        mid = int(len(lst) / 2)
+        l = mergesort(lst[:mid])
+        r = mergesort(lst[mid:])
         res = _merge(l, r)
         return res
-    return L
+    return lst
 
 
-def _merge(L1: list, L2: list) -> list:
-    len1 = len(L1)
-    len2 = len(L2)
+def _merge(lst1: list, lst2: list) -> list:
+    len1 = len(lst1)
+    len2 = len(lst2)
     res = [0] * (len1 + len2)
     i, j, k = 0, 0, 0
     while i < len1 and j < len2:
-        if L1[i] <= L2[j]:
-            res[k] = L1[i]
+        if lst1[i] <= lst2[j]:
+            res[k] = lst1[i]
             k += 1
             i += 1
             continue
-        if L2[j] <= L1[i]:
-            res[k] = L2[j]
+        if lst2[j] <= lst1[i]:
+            res[k] = lst2[j]
             k += 1
             j += 1
             continue
     # dealing with last element in res
     while i < len1:
-        res[k] = L1[i]
+        res[k] = lst1[i]
         k += 1
         i += 1
     while j < len2:
-        res[k] = L2[j]
+        res[k] = lst2[j]
         k += 1
         j += 1
     return res
 
 
-def timsort(L: list, partition_size=TIMSORT_PARTITION_SIZE) -> None:
+def timsort(lst: list, partition_size=TIMSORT_PARTITION_SIZE) -> None:
     """
     timsort algorithm for sorting lists of numbers
     """
-    for i in range(0, len(L), partition_size):
-        _insertion_sort_partitioned(L, i, min((i+1) * partition_size, len(L)-1))
-        # insertion_sort(L[i:min((i+1) * partition_size, len(L)-1)])
+    for i in range(0, len(lst), partition_size):
+        _insertion_sort_partitioned(lst, i, min((i+1) * partition_size, len(lst)-1))
     size = partition_size
-    while size < len(L):
-        for start in range(0, len(L), 2*size):
-            end = min(start+2*size-1, len(L)-1)
+    while size < len(lst):
+        for start in range(0, len(lst), 2*size):
+            end = min(start+2*size-1, len(lst)-1)
             mid = start + size - 1
-            _merge_timsort(L, start, mid, end)
+            _merge_timsort(lst, start, mid, end)
         size *= 2
 
 
-def _insertion_sort_partitioned(L: list, start: int, end: int) -> None:
+def _insertion_sort_partitioned(lst: list, start: int, end: int) -> None:
     for top in range(start, end + 1):
         k = top
         while k > start:
-            if L[k] < L[k - 1]:
-                L[k], L[k - 1] = L[k - 1], L[k]
+            if lst[k] < lst[k - 1]:
+                lst[k], lst[k - 1] = lst[k - 1], lst[k]
             k -= 1
 
 
-def _merge_timsort(L: list, start: int, mid: int, end: int) -> None:
-    l = L[:mid]
-    r = L[mid:]
+def _merge_timsort(lst: list, start: int, mid: int, end: int) -> None:
+    l = lst[:mid]
+    r = lst[mid:]
     len1 = len(l)
     len2 = len(r)
     
@@ -106,45 +105,45 @@ def _merge_timsort(L: list, start: int, mid: int, end: int) -> None:
     k = start
     while i < len1 and j < len2:
         if l[i] <= r[j]:
-            L[k] = l[i]
+            lst[k] = l[i]
             k += 1
             i += 1
             continue
         if r[j] <= l[i]:
-            L[k] = r[j]
+            lst[k] = r[j]
             k += 1
             j += 1
             continue
     while i < len1:
-        L[k] = l[i]
+        lst[k] = l[i]
         k += 1
         i += 1
     while j < len2:
-        L[k] = r[j]
+        lst[k] = r[j]
         k += 1
         j += 1
 
 
-def heapsort(L: list) -> None:
+def heapsort(lst: list) -> None:
     """
     heapsort algorithm for list of numbers
     """
-    last_elem_idx = len(L)
-    _heapify(L, last_elem_idx)
+    last_elem_idx = len(lst)
+    _heapify(lst, last_elem_idx)
     for i in range(last_elem_idx - 1, 0, -1):
-        L[0], L[i] = L[i], L[0]
-        _heapify(L, i)
+        lst[0], lst[i] = lst[i], lst[0]
+        _heapify(lst, i)
 
 
-def _heapify(L: list, root: int) -> None:
+def _heapify(lst: list, root: int) -> None:
     for i in range(root):
         largest = i
         left_leaf = 2*i + 1
         right_leaf = 2*i + 2
-        if left_leaf < root and L[left_leaf] > L[largest]:
+        if left_leaf < root and lst[left_leaf] > lst[largest]:
             largest = left_leaf
-        if right_leaf < root and L[right_leaf] > L[largest]:
+        if right_leaf < root and lst[right_leaf] > lst[largest]:
             largest = right_leaf
         if largest != i:
-            L[i], L[largest] = L[largest], L[i]
-            _heapify(L, largest)
+            lst[i], lst[largest] = lst[largest], lst[i]
+            _heapify(lst, largest)

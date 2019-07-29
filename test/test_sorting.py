@@ -83,14 +83,14 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(sorted(A), res)
 
     def test_merge(self):
-        A = [1,3,5,7,9]
-        B = [2,4,6,8]
+        A = [1, 3, 5, 7, 9]
+        B = [2, 4, 6, 8]
         res = _merge(A, B)
-        self.assertEqual([1,2,3,4,5,6,7,8,9], res)
+        self.assertEqual([1, 2, 3, 4, 5, 6, 7, 8, 9], res)
         A = [9, 10]
         B = [6, 7, 8]
         res = _merge(A, B)
-        self.assertEqual([6,7,8,9,10], res)
+        self.assertEqual([6, 7, 8, 9, 10], res)
 
     def test_mergesort(self):
         A = list(range(10, -1, -1))
@@ -106,8 +106,8 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(sorted(A), res)
 
     def test_merge_timsort(self):
-        A = [1,3,5,7,9,2,4,6,8]
-        res = [1,2,3,4,5,6,7,8,9]
+        A = [1, 3, 5, 7, 9, 2, 4, 6, 8]
+        res = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         start = 0
         end = len(A) - 1
         mid = 5
@@ -115,10 +115,10 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(res, A)
 
     def test_insertion_sort_partitioned(self):
-        A = [1,3,5,7,9,2,4,6,8]
+        A = [1, 3, 5, 7, 9, 2, 4, 6, 8]
         B = list(A)
         # sort 5,7,9,2 subsequence
-        res = [1,3,2,5,7,9,4,6,8]
+        res = [1, 3, 2, 5, 7, 9, 4, 6, 8]
         start = 2
         end = 5
         _insertion_sort_partitioned(B, start, end)
@@ -155,9 +155,6 @@ class TestSorting(unittest.TestCase):
         B = list(A)
         heapsort(B)
         self.assertEqual(sorted(A), B)
-
-
-
 
 
 if __name__ == '__main__':
