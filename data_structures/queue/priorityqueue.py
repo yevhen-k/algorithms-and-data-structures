@@ -2,6 +2,8 @@ from __future__ import annotations
 from data_structures.array.dynamicarray import DynamicArray
 from data_structures.queue.deque import Deque
 
+from sorting.n_log_n import _heapify
+
 
 class StrictPriorityQueue:
 
@@ -48,3 +50,37 @@ class StrictPriorityQueue:
             res.append('\t' + str(priority) + ': ' + str(self._p_array.get(priority-1)) + '\n')
         res.append(']')
         return ''.join(res)
+
+
+class PriorityQueue:
+
+    def __init__(self):
+        self._container = list()
+
+    def insert(self, priority: int) -> PriorityQueue:
+        self._container.append(priority)
+        _heapify(self._container, len(self))
+
+    def get(self):
+        max_priority = self._container[0]
+        self._container.pop(0)
+        _heapify(self._container, len(self))
+        return max_priority
+
+    def has_more(self) -> bool:
+        return len(self) > 0
+
+    def is_empty(self) -> bool:
+        return len(self) == 0
+
+    def __str__(self) -> str:
+        return str(self._container)
+
+    def __len__(self) -> int:
+        return len(self._container)
+
+    def __getitem__(self, idx):
+        if idx >= len(self):
+            raise StopIteration()
+        max_item = self.get()
+        return max_item

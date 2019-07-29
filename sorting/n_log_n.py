@@ -1,5 +1,6 @@
 TIMSORT_PARTITION_SIZE = 32
 
+
 def quicksort(L: list) -> list:
     """
     quick sort for list of numbers
@@ -10,11 +11,13 @@ def quicksort(L: list) -> list:
     _quicksort(copy, low, high)
     return copy
 
+
 def _quicksort(L: list, low: int, high: int) -> None:
     if low < high:
         partition = _partition(L, low, high)
         _quicksort(L, low, partition - 1)
         _quicksort(L, partition + 1, high)
+
 
 def _partition(L: list, low: int, high: int) -> int:
     pivot = L[high]
@@ -38,6 +41,7 @@ def mergesort(L: list) -> list:
         res = _merge(l, r)
         return res
     return L
+
 
 def _merge(L1: list, L2: list) -> list:
     len1 = len(L1)
@@ -130,6 +134,7 @@ def heapsort(L: list) -> None:
     for i in range(last_elem_idx - 1, 0, -1):
         L[0], L[i] = L[i], L[0]
         _heapify(L, i)
+
 
 def _heapify(L: list, root: int) -> None:
     for i in range(root):
