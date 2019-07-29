@@ -140,3 +140,6 @@ class DoublyLinkedList:
 
     def __len__(self) -> int:
         return self._size
+
+    def is_empty(self):
+        return self._size == 0
