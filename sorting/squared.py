@@ -1,6 +1,6 @@
 def bubble_sort(lst: list) -> None:
     """
-    bubble sort for list of numbres
+    bubble sort for list of numbers
     """
     n = len(lst)
     for i in range(n):
