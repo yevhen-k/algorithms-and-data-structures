@@ -59,12 +59,12 @@ class PriorityQueue:
 
     def insert(self, priority: int) -> PriorityQueue:
         self._container.append(priority)
-        _heapify(self._container, len(self))
+        return self
 
     def get(self):
+        _heapify(self._container, len(self))
         max_priority = self._container[0]
         self._container.pop(0)
-        _heapify(self._container, len(self))
         return max_priority
 
     def has_more(self) -> bool:
