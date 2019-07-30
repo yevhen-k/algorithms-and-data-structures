@@ -21,8 +21,6 @@ class BinarySearchTree:
             self.right = BinarySearchTree(key, data)
             return self
 
-
-
     def insert(self, key: int, data) -> BinarySearchTree:
         node = BinarySearchTree(key, data)
         current_node = self
@@ -39,6 +37,18 @@ class BinarySearchTree:
                     parent_node.right = node
                     return self
 
+    def find_rec(self, key: int) -> BinarySearchTree:
+        if key == self.key:
+            return self
+        if key < self.key and self.left is not None:
+            return self.left.find_rec(key)
+        if key < self.key and self.left is None:
+            return None
+        if key >= self.key and self.right is not None:
+            return self.right.find_rec(key)
+        if key >= self.key and self.right is None:
+            return None
+    
     def find(self, key: int) -> BinarySearchTree:
         current_node = self
         while current_node.key != key:
@@ -90,9 +100,12 @@ if __name__ == '__main__':
     # BinarySearchTree.post_order(b)
     b1 = BinarySearchTree(50, 1)
     b2 = BinarySearchTree(50, 1)
-    for i in [30, 20, 40, 60, 10, 70]:
+    lst = [30, 20, 40, 60, 10, 70]
+    for i in lst:
         b1.insert(i, i)
         b2.insert_rec(i, i)
     print(b1)
     print(b2)
     print(str(b1) == str(b2))
+    for i in lst:
+        print(b1.find(i).data == b2.find_rec(i).data, i)
